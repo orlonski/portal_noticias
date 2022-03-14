@@ -64,7 +64,6 @@ app.get('/', (req, res) => {
         })
     } else {
         Posts.find({ titulo: { $regex: req.query.busca, $options: "i" } }, (err, posts) => {
-            console.log(posts)
             res.render('busca', { posts: posts, contagem: posts.length });
         })
     }
@@ -94,15 +93,15 @@ app.get('/:slug', (req, res) => {
 
 var usuarios = [
     {
-        login: 'orlonski@icloud.com',
-        senha: '123456'
+        login: 'admin',
+        senha: 'admin'
     }
 ]
 
 app.post('/admin/login', (req, res) => {
     usuarios.map((val) => {
         if (val.login == req.body.login && val.senha == req.body.senha) {
-            req.session.login = "Guilherme"
+            req.session.login = "Logado"
         }
     })
     res.redirect('/admin/login')
